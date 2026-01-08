@@ -11,6 +11,45 @@ import {
   Rocket, SearchCheck, Building, TrendingUp, FileCheck, Globe
 } from 'lucide-react';
 
+const Logo: React.FC<{ className?: string }> = ({ className }) => (
+  <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Chama/Tocha */}
+    <path d="M50 10C55 25 65 30 65 40C65 50 55 55 50 55C45 55 35 50 35 40C35 30 45 25 50 10Z" fill="url(#flameGradient)" />
+    <circle cx="42" cy="28" r="2" fill="#FFB74D" />
+    <circle cx="58" cy="28" r="2" fill="#FFB74D" />
+    
+    {/* Haste Central */}
+    <path d="M50 50V75" stroke="#1E3A3A" strokeWidth="4" strokeLinecap="round" />
+    <circle cx="50" cy="52" r="4" fill="#1E3A3A" />
+    <circle cx="50" cy="65" r="3" fill="#1E3A3A" />
+    <circle cx="50" cy="73" r="3" fill="#1E3A3A" />
+    
+    {/* Base */}
+    <path d="M38 80H62" stroke="#1E3A3A" strokeWidth="3" strokeLinecap="round" />
+    <path d="M35 85H65" stroke="#1E3A3A" strokeWidth="5" strokeLinecap="round" />
+    
+    {/* Braços da Balança */}
+    <path d="M30 45C35 35 45 42 50 42C55 42 65 35 70 45" stroke="#1E3A3A" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    
+    {/* Pratos */}
+    <path d="M25 50L30 65H45L50 50" stroke="#1E3A3A" strokeWidth="0" fill="none" /> {/* Hidden support lines */}
+    <path d="M26 55C26 62 33 65 38 65C43 65 50 62 50 55H26Z" fill="#264D4D" stroke="#1E3A3A" strokeWidth="2" />
+    <path d="M50 55C50 62 57 65 62 65C67 65 74 62 74 55H50Z" fill="#264D4D" stroke="#1E3A3A" strokeWidth="2" />
+    
+    {/* Detalhes de brilho nos pratos */}
+    <path d="M45 58C46 58 48 59 48 61" stroke="white" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+    <path d="M69 58C70 58 72 59 72 61" stroke="white" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+
+    <defs>
+      <linearGradient id="flameGradient" x1="50" y1="10" x2="50" y2="55" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#FFD54F" />
+        <stop offset="50%" stopColor="#FB8C00" />
+        <stop offset="100%" stopColor="#E64A19" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
 const App: React.FC = () => {
   const [currentSection, setCurrentSection] = useState<AppSection>(AppSection.HOME);
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
@@ -352,8 +391,11 @@ const App: React.FC = () => {
       case AppSection.HOME:
         return (
           <div className="space-y-8 animate-in fade-in duration-500">
-            <header className="py-12 px-8 bg-gradient-to-br from-brand via-brand-dark to-brand-deep text-white rounded-[3rem] shadow-2xl mb-8 relative overflow-hidden">
-              <div className="relative z-10">
+            <header className="py-12 px-8 bg-gradient-to-br from-brand via-brand-dark to-brand-deep text-white rounded-[3rem] shadow-2xl mb-8 relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
+              <div className="w-40 h-40 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-4 border-white/30 shrink-0 shadow-inner group overflow-hidden">
+                <Logo className="w-32 h-32 group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div className="relative z-10 text-center md:text-left">
                 <h1 className="text-5xl font-black mb-4 tracking-tighter">Ser Social</h1>
                 <p className="text-xl opacity-90 max-w-2xl font-medium leading-relaxed">O ecossistema informativo para o estudante de Serviço Social. Conhecimento técnico e offline.</p>
               </div>
@@ -696,8 +738,10 @@ const App: React.FC = () => {
     <div className="min-h-screen pb-24 lg:pb-8 flex flex-col lg:flex-row max-w-7xl mx-auto px-4 lg:px-0">
       {/* Sidebar - Desktop */}
       <nav className="hidden lg:flex flex-col w-72 bg-white border-r border-slate-100 h-screen sticky top-0 p-8 shadow-sm">
-        <div className="flex items-center gap-3 mb-12 text-brand-deep">
-            <BookOpen size={40} className="fill-brand/30" />
+        <div className="flex items-center gap-3 mb-12 text-brand-deep group cursor-pointer" onClick={() => setCurrentSection(AppSection.HOME)}>
+            <div className="w-12 h-12 bg-brand-light rounded-full flex items-center justify-center group-hover:bg-brand transition-colors p-1 overflow-hidden border border-brand/20">
+              <Logo className="w-full h-full" />
+            </div>
             <span className="text-2xl font-black tracking-tighter uppercase">Ser Social</span>
         </div>
         <div className="flex-1 space-y-3">
