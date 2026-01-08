@@ -462,7 +462,7 @@ const App: React.FC = () => {
             <ul className="list-disc pl-5 text-sm text-slate-600 space-y-2">
               <li>Identificação de barreiras socioeconômicas ao aprendizado.</li>
               <li>Mediação de conflitos entre escola, família e comunidade.</li>
-              <li>Encaminhamento para a rede de proteção social (CRAS, CREAS, CAPS).</li>
+              <li>Encaminhamento para the rede de proteção social (CRAS, CREAS, CAPS).</li>
               <li>Combate à evasão escolar e ao trabalho infantil.</li>
             </ul>
           </div>
@@ -940,11 +940,15 @@ const App: React.FC = () => {
                   { title: "Empresas", icon: <Building />, color: "bg-slate-100 text-slate-600", desc: "Responsabilidade Social e ESG. Bem-estar dos colaboradores." },
                   { title: "Educação", icon: <School />, color: "bg-indigo-50 text-indigo-600", desc: "Permanência escolar e combate a violações de direitos no ambiente escolar." },
                   { title: "Terceiro Setor", icon: <Globe />, color: "bg-amber-50 text-amber-600", desc: "Gestão de ONGs e captação de recursos para projetos de impacto." },
-                  { title: "Estado (SUAS)", icon: <Landmark />, color: "bg-brand-light text-brand-deep", desc: "CRAS, CREAS e Gestão Pública. Carreira estável via concurso." }
+                  { title: "Assistência Social", icon: <Landmark />, color: "bg-brand-light text-brand-deep", desc: "CRAS, CREAS e Gestão Pública. Carreira estável via concurso." },
+                  { title: "Previdência Social", icon: <ShieldCheck />, color: "bg-cyan-50 text-cyan-600", desc: "INSS. Avaliação social para concessão de benefícios: aposentadorias, pensões e auxílios." },
+                  { title: "Habitação e Urbanismo", icon: <Home />, color: "bg-orange-50 text-orange-600", desc: "Programas habitacionais, regularização fundiária, políticas urbanas e comunitárias." },
+                  { title: "Políticas para Grupos Específicos", icon: <Users />, color: "bg-teal-50 text-teal-600", desc: "Crianças, idosos, PCDs, mulheres, indígenas, quilombolas e migrantes." },
+                  { title: "Ensino, Pesquisa e Planejamento", icon: <GraduationCap />, color: "bg-purple-50 text-purple-600", desc: "Docência superior, pesquisa social, planejamento, gestão e avaliação de políticas públicas." }
                 ].map((area, i) => (
                   <div key={i} className="p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all group flex flex-col gap-6">
                     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${area.color} group-hover:scale-110 transition-transform shadow-sm`}>{area.icon}</div>
-                    <h4 className="font-black text-slate-800 text-lg tracking-tight">{area.title}</h4>
+                    <h4 className="font-black text-slate-800 text-lg tracking-tight leading-tight">{area.title}</h4>
                     <p className="text-xs text-slate-500 leading-relaxed flex-1">{area.desc}</p>
                     <button className="text-[10px] font-black text-brand-dark uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all">Ver Detalhes <ArrowRight size={16} /></button>
                   </div>
