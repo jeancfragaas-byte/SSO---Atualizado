@@ -8,7 +8,10 @@ export enum AppSection {
   INTERNSHIP = 'internship',
   CAREER = 'career',
   SELFCARE = 'selfcare',
-  GLOSSARY = 'glossary'
+  GLOSSARY = 'glossary',
+  INSTRUMENTS = 'instruments',
+  BIBLIOGRAPHY = 'bibliography',
+  ABOUT = 'about'
 }
 
 export interface ContentItem {

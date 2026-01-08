@@ -4,7 +4,8 @@ import {
   Book, Scale, Briefcase, Heart, Home, GraduationCap, 
   Users, Globe, ShieldCheck, MessageSquare, Compass, 
   Settings, Layers, RefreshCw, Landmark, Shield, 
-  AlertTriangle, Network, Activity, Info 
+  AlertTriangle, Network, Activity, Info, PenTool,
+  Library, Info as InfoIcon
 } from 'lucide-react';
 import { AppSection, GlossaryTerm, NavItem } from './types';
 
@@ -12,9 +13,106 @@ export const NAV_ITEMS: NavItem[] = [
   { id: AppSection.HOME, label: 'Início', icon: <Home size={20} /> },
   { id: AppSection.ACADEMIC, label: 'Acadêmico', icon: <Book size={20} /> },
   { id: AppSection.POLICIES, label: 'Políticas', icon: <Scale size={20} /> },
+  { id: AppSection.INSTRUMENTS, label: 'Instrumentos', icon: <PenTool size={20} /> },
+  { id: AppSection.BIBLIOGRAPHY, label: 'Bibliografia', icon: <Library size={20} /> },
   { id: AppSection.INTERNSHIP, label: 'Estágio', icon: <Briefcase size={20} /> },
   { id: AppSection.CAREER, label: 'Carreira', icon: <GraduationCap size={20} /> },
   { id: AppSection.SELFCARE, label: 'Autocuidado', icon: <Heart size={20} /> },
+  { id: AppSection.ABOUT, label: 'Sobre', icon: <InfoIcon size={20} /> },
+];
+
+export const BIBLIOGRAPHY_DATA = [
+  {
+    title: "O Serviço Social na Contemporaneidade",
+    author: "Marilda Iamamoto",
+    category: "Fundamentos",
+    desc: "Obra essencial para entender as transformações do trabalho profissional frente à reestruturação produtiva.",
+    importance: "Alta - Base da formação contemporânea."
+  },
+  {
+    title: "Serviço Social em Tempo de Capital Fetiche",
+    author: "Marilda Villela Iamamoto",
+    category: "Fundamentos",
+    desc: "Uma análise densa sobre o capital financeiro, a questão social e os desafios do trabalho do assistente social.",
+    importance: "Alta - Teoria Crítica."
+  },
+  {
+    title: "Relações Sociais e Serviço Social no Brasil",
+    author: "Marilda Villela Iamamoto / Raul de Carvalho",
+    category: "História",
+    desc: "Livro divisor de águas que introduz a perspectiva dialética e a análise do projeto profissional no Brasil.",
+    importance: "Alta - Obra Clássica."
+  },
+  {
+    title: "Ditadura e Serviço Social",
+    author: "José Paulo Netto",
+    category: "História",
+    desc: "Análise crítica sobre o processo de renovação do Serviço Social no Brasil durante o período ditatorial.",
+    importance: "Alta - Compreensão do Movimento de Reconceituação."
+  },
+  {
+    title: "Capitalismo Monopolista e Serviço Social",
+    author: "José Paulo Netto",
+    category: "Teoria Social",
+    desc: "Explora a gênese do Serviço Social como uma instituição típica do capitalismo monopolista.",
+    importance: "Alta - Fundamentação teórica clássica."
+  },
+  {
+    title: "Introdução ao Estudo do Método de Marx",
+    author: "José Paulo Netto",
+    category: "Fundamentos",
+    desc: "Guia fundamental para compreender a base metodológica da teoria social crítica necessária à profissão.",
+    importance: "Alta - Formação Intelectual."
+  },
+  {
+    title: "A Instrumentalidade do Serviço Social",
+    author: "Yolanda Guerra",
+    category: "Prática Profissional",
+    desc: "Exame rigoroso da instrumentalidade como categoria mediadora da prática e sua dimensão ético-política.",
+    importance: "Alta - Teoria e Prática."
+  },
+  {
+    title: "Política Social: Fundamentos e História",
+    author: "Behring & Boschetti",
+    category: "Política Social",
+    desc: "Referência fundamental para o estudo da gênese e do desenvolvimento das políticas sociais no capitalismo.",
+    importance: "Obrigatória - Concursos e Graduação."
+  },
+  {
+    title: "A Política Social do Estado Capitalista",
+    author: "Vicente de Paula Faleiros",
+    category: "Política Social",
+    desc: "Aborda a política social sob a ótica da luta de classes e as funções do Estado no atendimento às demandas.",
+    importance: "Alta - Visão Crítica."
+  },
+  {
+    title: "Serviço Social: Identidade e Alienação",
+    author: "Maria Lúcia Martinelli",
+    category: "Fundamentos",
+    desc: "Investiga a trajetória histórica do Serviço Social e a constante busca pela superação da alienação profissional.",
+    importance: "Alta - Reflexão Histórica."
+  },
+  {
+    title: "Estratégias em Serviço Social",
+    author: "Vicente Faleiros",
+    category: "Prática Profissional",
+    desc: "Reflexão sobre a dimensão política da prática e o uso de estratégias de intervenção social.",
+    importance: "Média - Foco em metodologias de ação."
+  },
+  {
+    title: "O que é Serviço Social",
+    author: "José Paulo Netto / Marilda Iamamoto",
+    category: "Introdução",
+    desc: "Uma introdução clara e concisa sobre a profissão, ideal para estudantes iniciantes.",
+    importance: "Alta - Nivelamento inicial."
+  },
+  {
+    title: "Serviço Social: Direitos Sociais e Competências Profissionais",
+    author: "CFESS/ABEPSS",
+    category: "Legislação/Ética",
+    desc: "Coletânea fundamental que reúne artigos sobre as competências exigidas na atualidade.",
+    importance: "Obrigatória - Base normativa e ética."
+  }
 ];
 
 export const GLOSSARY_DATA: GlossaryTerm[] = [
@@ -50,7 +148,7 @@ export const GLOSSARY_DATA: GlossaryTerm[] = [
   },
   {
     term: 'Ética Profissional',
-    definition: 'Conjunto de princípios e valores que orientam a atuação do/a assistente social, fundamentados no Código de Ética Profissional.',
+    definition: 'Conjunto de princípios e values que orientam a atuação do/a assistente social, fundamentados no Código de Ética Profissional.',
     category: 'Ética',
     icon: <Compass size={18} />
   },
