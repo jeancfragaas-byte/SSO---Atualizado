@@ -11,7 +11,7 @@ import {
   Rocket, SearchCheck, Building, TrendingUp, FileCheck, Globe, Gavel, 
   UserPlus, Award, AlertCircle, Quote, Home, Shield, Flag, UserMinus,
   RefreshCw, Book, MapPin, ClipboardList, MessageCircle, FileSearch, Scale as ScaleIcon,
-  Settings, Library, BookMarked, Sparkles
+  Settings, Library, BookMarked, Sparkles, Binary, Microscope, Clipboard, UserRound, HandHeart
 } from 'lucide-react';
 
 const Logo: React.FC<{ className?: string }> = ({ className }) => (
@@ -73,6 +73,36 @@ const App: React.FC = () => {
       return matchesSearch && matchesCategory;
     });
   }, [searchTerm, activeCategory]);
+
+  const handleGlossaryDetail = (term: string) => {
+    // Mapeia termos do glossário para as seções detalhadas existentes
+    const lowerTerm = term.toLowerCase();
+    
+    if (lowerTerm.includes('assistência social')) {
+      setCurrentSection(AppSection.POLICIES);
+      setSelectedDoc('suas-detalhado');
+    } else if (lowerTerm.includes('ética profissional')) {
+      setCurrentSection(AppSection.ACADEMIC);
+      setSelectedDoc('etica');
+    } else if (lowerTerm.includes('instrumental técnico-operativo')) {
+      setCurrentSection(AppSection.INSTRUMENTS);
+      setSelectedDoc(null);
+    } else if (lowerTerm.includes('questão social')) {
+      setCurrentSection(AppSection.ACADEMIC);
+      setSelectedDoc('diretrizes'); // Questão social é abordada nas diretrizes
+    } else if (lowerTerm.includes('políticas públicas')) {
+      setCurrentSection(AppSection.POLICIES);
+      setSelectedDoc(null);
+    } else if (lowerTerm.includes('redes') || lowerTerm.includes('socioassistencial')) {
+      setCurrentSection(AppSection.POLICIES);
+      setSelectedDoc('suas-detalhado');
+    } else {
+      // Para outros termos sem seção específica, podemos redirecionar para a biblioteca ou mostrar uma mensagem
+      setSelectedDoc(null);
+      setCurrentSection(AppSection.ACADEMIC);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const renderAcademicDetailed = () => {
     const handleBack = () => setSelectedDoc(null);
@@ -354,31 +384,169 @@ const App: React.FC = () => {
 
     if (selectedDoc === 'diretrizes') {
         return (
-          <div className="space-y-8 pb-10 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-3xl mx-auto">
-            <button onClick={handleBack} className="flex items-center gap-2 text-brand-deep bg-brand-light/50 px-4 py-2 rounded-xl font-bold mb-6 hover:bg-brand transition-all group border border-brand/20">
-              <ArrowLeft size={20} className="group-hover:-translate-x-1" /> Voltar
+          <div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-4xl mx-auto">
+            <button onClick={handleBack} className="flex items-center gap-2 text-brand-deep bg-brand-light/50 px-5 py-2.5 rounded-2xl font-bold mb-8 hover:bg-brand transition-all group border border-brand/20 shadow-sm">
+              <ArrowLeft size={20} className="group-hover:-translate-x-1" /> Voltar para Biblioteca
             </button>
-            <header className="border-b border-brand-light pb-6">
-              <h1 className="text-3xl font-black text-slate-800 mb-2 uppercase">Diretrizes da ABEPSS</h1>
-              <p className="text-slate-500 font-medium italic">O Currículo Mínimo de 1996</p>
+
+            <header className="border-b-4 border-brand-light pb-8 relative">
+              <h1 className="text-4xl font-black text-slate-800 mb-4 uppercase tracking-tighter leading-tight">Diretrizes da Formação Profissional em Serviço Social</h1>
+              <p className="text-lg text-slate-500 font-medium italic leading-relaxed">
+                "Orientando a formação de assistentes sociais críticos e éticos."
+              </p>
+              <div className="absolute right-0 bottom-8 hidden md:block opacity-10">
+                <LayoutGrid size={120} />
+              </div>
             </header>
-            <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed space-y-6">
-                <p>Define a base da formação do assistente social no Brasil, estruturada em três núcleos fundamentais que garantem uma formação generalista e crítica.</p>
-                <div className="space-y-4">
-                    {[
-                        { n: "1", t: "Fundamentos Teórico-Metodológicos", d: "Compreensão da vida social, da história e das teorias sociais." },
-                        { n: "2", t: "Particularidade da Formação Social Brasileira", d: "Entendimento da realidade do Brasil, desigualdades e história." },
-                        { n: "3", t: "Trabalho Profissional", d: "A instrumentalidade, ética e prática do serviço social no campo." }
-                    ].map(item => (
-                        <div key={item.n} className="flex items-center gap-4 p-5 bg-white border border-slate-100 shadow-sm rounded-3xl">
-                            <div className="w-10 h-10 bg-brand rounded-full flex items-center justify-center text-slate-900 font-black shrink-0">{item.n}</div>
-                            <div>
-                                <h5 className="font-black text-slate-800 text-sm">{item.t}</h5>
-                                <p className="text-[11px] text-slate-500">{item.d}</p>
-                            </div>
-                        </div>
-                    ))}
+
+            <div className="space-y-12">
+              <section className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-xl text-slate-700 space-y-6">
+                <p className="text-lg leading-relaxed">
+                  A formação em Serviço Social está diretamente vinculada às transformações históricas da sociedade, do Estado e do mundo do trabalho. As diretrizes curriculares aqui apresentadas orientam a formação de assistentes sociais críticos, éticos e comprometidos com o enfrentamento das expressões da <strong>questão social</strong>.
+                </p>
+              </section>
+
+              <section className="space-y-8">
+                <div className="flex items-center gap-4">
+                   <div className="h-10 w-2 bg-brand rounded-full"></div>
+                   <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tighter">📌 Pressupostos da Formação</h2>
                 </div>
+                <div className="bg-slate-50 p-8 rounded-[3rem] border border-slate-200 space-y-4 text-slate-600">
+                  <p>O Serviço Social é compreendido como uma profissão histórica, inserida na divisão social e técnica do trabalho. Seu fundamento central é a questão social, expressão das desigualdades produzidas pelo desenvolvimento do capitalismo.</p>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    {[
+                      "Transformação conforme mudam relações sociais e políticas",
+                      "Mediação entre Estado, sociedade e classes sociais",
+                      "Impacto da reestruturação produtiva e neoliberalismo",
+                      "Resposta a demandas sociais complexas e críticas"
+                    ].map((item, i) => (
+                      <li key={i} className="flex gap-3 text-xs items-center bg-white p-4 rounded-2xl shadow-sm">
+                        <CheckCircle2 size={16} className="text-brand shrink-0" /> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+
+              <section className="space-y-8">
+                <div className="flex items-center gap-4">
+                   <div className="h-10 w-2 bg-brand rounded-full"></div>
+                   <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tighter">🎓 Princípios da Formação</h2>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {[
+                    "Flexibilidade curricular", "Rigor teórico e metodológico", "Teoria social crítica", 
+                    "Articulação entre conteúdos", "Integração entre teoria e prática", "Interdisciplinaridade",
+                    "Ensino, pesquisa e extensão", "Pluralismo teórico", "Ética como princípio transversal",
+                    "Estágio supervisionado", "Qualidade dia e noite"
+                  ].map((p, i) => (
+                    <div key={i} className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm text-center flex flex-col items-center justify-center gap-2 hover:border-brand transition-colors group">
+                      <Binary size={20} className="text-slate-300 group-hover:text-brand transition-colors" />
+                      <span className="text-[10px] font-bold text-slate-600 uppercase leading-tight">{p}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section className="space-y-8">
+                <div className="flex items-center gap-4">
+                   <div className="h-10 w-2 bg-brand rounded-full"></div>
+                   <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tighter">🧩 Organização Curricular</h2>
+                </div>
+                <p className="text-sm text-slate-500 italic">Estruturada a partir do trabalho como categoria central da vida social.</p>
+                
+                <div className="grid grid-cols-1 gap-6">
+                  {[
+                    { 
+                      n: "1", t: "Fundamentos Teórico-Metodológicos da Vida Social", 
+                      d: "Estuda o ser social como totalidade histórica, o trabalho, as classes sociais, as relações de poder, a cultura, a ética e as teorias que explicam a realidade social.",
+                      icon: <Binary /> 
+                    },
+                    { 
+                      n: "2", t: "Fundamentos da Formação Sócio-Histórica da Sociedade Brasileira", 
+                      d: "Analisa a constituição do capitalismo no Brasil, o Estado, as políticas sociais, as desigualdades sociais, as relações de classe, gênero e raça, e os movimentos sociais.",
+                      icon: <Globe /> 
+                    },
+                    { 
+                      n: "3", t: "Fundamentos do Trabalho Profissional", 
+                      d: "Compreende o Serviço Social como especialização do trabalho coletivo, abordando o processo de trabalho, estratégias de intervenção, pesquisa e o compromisso ético-político.",
+                      icon: <Briefcase /> 
+                    }
+                  ].map((nucleo, i) => (
+                    <div key={i} className="bg-white p-8 rounded-[3rem] border border-slate-100 shadow-sm flex flex-col md:flex-row gap-8 items-start group hover:border-brand transition-colors">
+                      <div className="w-16 h-16 bg-brand-light text-brand rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-brand group-hover:text-slate-900 transition-colors shadow-sm">
+                        {nucleo.icon}
+                      </div>
+                      <div className="space-y-3">
+                        <h4 className="text-xl font-black text-slate-800 tracking-tight leading-tight uppercase">Núcleo {nucleo.n}: {nucleo.t}</h4>
+                        <p className="text-sm text-slate-600 leading-relaxed">{nucleo.d}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-slate-900 p-10 rounded-[3rem] shadow-xl text-white space-y-6">
+                  <h3 className="text-xl font-black uppercase text-brand flex items-center gap-3">
+                    <Microscope size={24} /> Áreas de Conhecimento
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {["Sociologia", "Ciência Política", "Economia Política", "Filosofia", "Psicologia", "Antropologia", "Direito", "Política Social", "Ética", "Planejamento"].map((a, i) => (
+                      <span key={i} className="px-3 py-1.5 bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-wider">{a}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white border-2 border-slate-100 p-10 rounded-[3rem] shadow-sm space-y-6">
+                  <h3 className="text-xl font-black uppercase text-slate-800 flex items-center gap-3">
+                    <Clipboard size={24} className="text-brand" /> Atividades Integradoras
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <h5 className="text-sm font-black text-brand-deep">Estágio Supervisionado</h5>
+                      <p className="text-[11px] text-slate-500">Atividade obrigatória com supervisão acadêmica e de campo. Mínimo de 15% da carga horária.</p>
+                    </div>
+                    <div>
+                      <h5 className="text-sm font-black text-brand-deep">Trabalho de Conclusão (TCC)</h5>
+                      <p className="text-[11px] text-slate-500">Monografia científica que sintetiza a formação acadêmica e articula teoria e prática.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <div className="bg-brand text-slate-900 p-12 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+                <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                  <div className="w-24 h-24 bg-white/40 rounded-full flex items-center justify-center shrink-0 shadow-lg">
+                    <Award size={48} className="text-slate-900" />
+                  </div>
+                  <div className="space-y-4">
+                    <h4 className="text-2xl font-black uppercase tracking-tight">Formação com Compromisso Social</h4>
+                    <p className="text-lg font-medium leading-relaxed italic opacity-90">
+                      "O objetivo é preparar profissionais críticos, éticos e qualificados, capazes de compreender a realidade em sua totalidade e intervir comprometidos com a <strong>justiça social, direitos humanos e democracia</strong>."
+                    </p>
+                  </div>
+                </div>
+                <Users size={200} className="absolute -right-20 -bottom-20 text-slate-900 opacity-5 group-hover:scale-110 transition-transform duration-1000" />
+              </div>
+
+              <div className="flex justify-center gap-8 text-center py-4">
+                <div>
+                   <span className="block text-2xl font-black text-brand-deep">2.700h</span>
+                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Carga Mínima</span>
+                </div>
+                <div className="w-px h-12 bg-slate-200"></div>
+                <div>
+                   <span className="block text-2xl font-black text-brand-deep">4 Anos</span>
+                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Duração Média</span>
+                </div>
+              </div>
+
+              <div className="pt-8 flex justify-center">
+                  <a href="https://www.abepss.org.br/arquivos/textos/documento_201603311138166377210.pdf" target="_blank" className="flex items-center justify-center gap-4 px-10 py-5 bg-slate-900 text-brand rounded-[2rem] font-black uppercase tracking-widest hover:bg-brand hover:text-slate-900 transition-all shadow-xl group text-center">
+                      <ExternalLink size={24} className="group-hover:rotate-12 transition-transform shrink-0" /> Acessar Documento Completo da ABEPSS (PDF)
+                  </a>
+              </div>
             </div>
           </div>
         );
@@ -419,26 +587,134 @@ const App: React.FC = () => {
   const renderAssistenciaDetailed = () => {
     const handleBack = () => setSelectedDoc(null);
     return (
-      <div className="space-y-8 pb-10 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-3xl mx-auto">
-        <button onClick={handleBack} className="flex items-center gap-2 text-amber-600 bg-amber-50 px-4 py-2 rounded-xl font-bold mb-6 hover:bg-amber-100 transition-all group border border-amber-200">
-          <ArrowLeft size={20} className="group-hover:-translate-x-1" /> Voltar
+      <div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-4xl mx-auto">
+        <button onClick={handleBack} className="flex items-center gap-2 text-amber-600 bg-amber-50 px-5 py-2.5 rounded-2xl font-bold mb-8 hover:bg-amber-100 transition-all group border border-amber-200 shadow-sm">
+          <ArrowLeft size={20} className="group-hover:-translate-x-1" /> Voltar para Políticas
         </button>
-        <header className="border-b border-amber-100 pb-6">
-          <h1 className="text-3xl font-black text-slate-800 mb-2 uppercase">SUAS - Assistência Social</h1>
-          <p className="text-slate-500 font-medium italic">Proteção Social, Vigilância Socioassistencial e Defesa de Direitos</p>
-        </header>
-        <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 bg-white border border-amber-100 rounded-3xl shadow-sm">
-              <h4 className="font-black text-amber-800 mb-3 flex items-center gap-2"><Home size={18}/> Proteção Básica (CRAS)</h4>
-              <p className="text-xs text-slate-600">Unidade pública estatal que atua na prevenção de situações de risco através do PAIF (Proteção e Atendimento Integral à Família).</p>
-            </div>
-            <div className="p-6 bg-white border border-amber-100 rounded-3xl shadow-sm">
-              <h4 className="font-black text-amber-800 mb-3 flex items-center gap-2"><ShieldAlert size={18}/> Proteção Especial (CREAS)</h4>
-              <p className="text-xs text-slate-600">Atendimento especializado a famílias e indivíduos com direitos violados, como violência, exploração ou negligência.</p>
-            </div>
+
+        <header className="border-b-4 border-amber-100 pb-8 relative">
+          <h1 className="text-5xl font-black text-slate-800 mb-4 uppercase tracking-tighter">Assistência Social</h1>
+          <p className="text-xl text-slate-500 font-medium italic leading-relaxed max-w-3xl">
+            "Proteção Social, Vigilância Socioassistencial e Defesa de Direitos."
+          </p>
+          <div className="absolute right-0 bottom-8 hidden md:block opacity-10">
+            <ShieldCheck size={120} />
           </div>
-          <p className="text-lg">A Assistência Social é um direito do cidadão e dever do Estado, sendo uma política de Seguridade Social não contributiva.</p>
+        </header>
+
+        <div className="space-y-12">
+          <section className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-xl text-slate-700 space-y-6">
+            <p className="text-lg leading-relaxed">
+              A <strong>Assistência Social</strong> é uma política pública essencial que faz parte da Seguridade Social, juntamente com a saúde e a previdência social. Seu principal objetivo é garantir proteção social e promover a inclusão, assegurando direitos fundamentais a pessoas, famílias e grupos que se encontram em situação de vulnerabilidade ou risco social.
+            </p>
+            <p className="text-lg leading-relaxed">
+              Diferente da previdência, a assistência social <strong>não exige contribuição prévia</strong>, sendo um direito de todo cidadão que dela necessitar. Ela atua na prevenção de situações de exclusão social e no enfrentamento das desigualdades, fortalecendo a autonomia das pessoas e os vínculos familiares e comunitários.
+            </p>
+          </section>
+
+          <section className="space-y-8">
+            <div className="flex items-center gap-4">
+               <div className="h-10 w-2 bg-amber-400 rounded-full"></div>
+               <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tighter">Principais Objetivos</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                "Promover a proteção social e a dignidade humana",
+                "Reduzir desigualdades sociais e combater a pobreza",
+                "Prevenir situações de risco social e violação de direitos",
+                "Fortalecer vínculos familiares e comunitários",
+                "Garantir acesso a serviços, benefícios e oportunidades"
+              ].map((obj, i) => (
+                <div key={i} className="p-6 bg-amber-50 border border-amber-100 rounded-3xl flex items-start gap-4 shadow-sm hover:bg-amber-100 transition-colors group">
+                  <div className="p-2 bg-white rounded-xl shadow-sm group-hover:scale-110 transition-transform"><CheckCircle2 className="text-amber-500" size={20} /></div>
+                  <p className="text-sm font-bold text-amber-900 leading-tight">{obj}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="space-y-8">
+            <div className="flex items-center gap-4">
+               <div className="h-10 w-2 bg-amber-400 rounded-full"></div>
+               <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tighter">Quem é Atendido</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {[
+                { t: "Famílias em vulnerabilidade", icon: <Users /> },
+                { t: "Crianças e adolescentes", icon: <School className="hidden" /> }, 
+                { t: "Idosos", icon: <Users /> },
+                { t: "Pessoas com deficiência", icon: <UserCheck /> },
+                { t: "Pessoas em situação de rua ou vítimas de violência", icon: <ShieldAlert /> }
+              ].map((p, i) => (
+                <div key={i} className="p-6 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm flex flex-col items-center text-center gap-4 group hover:border-amber-400 transition-colors">
+                  <div className="w-12 h-12 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-all">
+                    {i === 1 ? <School size={24} /> : i === 0 || i === 2 ? <Users size={24} /> : i === 3 ? <UserCheck size={24} /> : <ShieldAlert size={24} />}
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-tight text-slate-600 leading-tight">{p.t}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="space-y-8">
+            <div className="flex items-center gap-4">
+               <div className="h-10 w-2 bg-amber-400 rounded-full"></div>
+               <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tighter">Como funciona no Brasil</h2>
+            </div>
+            <div className="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden group">
+              <div className="relative z-10 space-y-6">
+                <p className="text-lg font-medium leading-relaxed italic opacity-90">
+                  No Brasil, a assistência social é organizada pelo <strong>Sistema Único de Assistência Social (SUAS)</strong>, que estrutura e coordena ações em todo o território nacional.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 bg-white/10 rounded-3xl border border-white/10 backdrop-blur-sm">
+                    <h4 className="font-black text-amber-400 uppercase mb-2 flex items-center gap-2"><Home size={18}/> CRAS</h4>
+                    <p className="text-xs text-slate-300 leading-relaxed">Centros de Referência de Assistência Social: A porta de entrada da assistência. Atua na proteção básica e prevenção.</p>
+                  </div>
+                  <div className="p-6 bg-white/10 rounded-3xl border border-white/10 backdrop-blur-sm">
+                    <h4 className="font-black text-amber-400 uppercase mb-2 flex items-center gap-2"><ShieldAlert size={18}/> CREAS</h4>
+                    <p className="text-xs text-slate-300 leading-relaxed">Centros de Referência Especializados: Atendimento especializado a famílias e indivíduos com direitos já violados.</p>
+                  </div>
+                </div>
+              </div>
+              <Landmark size={200} className="absolute -right-20 -bottom-20 text-white opacity-5 group-hover:scale-110 transition-transform duration-1000" />
+            </div>
+          </section>
+
+          <section className="space-y-8">
+            <div className="flex items-center gap-4">
+               <div className="h-10 w-2 bg-amber-400 rounded-full"></div>
+               <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tighter">Princípios Orientadores</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {[
+                "Universalidade do acesso",
+                "Respeito à dignidade e à diversidade",
+                "Igualdade de direitos",
+                "Participação social e cidadania",
+                "Garantia de proteção social"
+              ].map((princ, i) => (
+                <div key={i} className="p-5 bg-white border border-slate-100 rounded-3xl shadow-sm text-center flex items-center justify-center hover:border-amber-400 transition-colors">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-700">{princ}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="bg-amber-400 text-slate-900 p-12 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+              <div className="w-24 h-24 bg-white/40 rounded-full flex items-center justify-center shrink-0 shadow-lg">
+                <HandHeart size={48} className="text-slate-900" />
+              </div>
+              <div className="space-y-4">
+                <h4 className="text-2xl font-black uppercase tracking-tight">Cidadania em Movimento</h4>
+                <p className="text-lg font-medium leading-relaxed italic opacity-90">
+                  "A Assistência Social é, portanto, um importante instrumento de <strong>promoção da cidadania</strong>, contribuindo para uma sociedade mais justa, solidária e inclusiva."
+                </p>
+              </div>
+            </div>
+            <Users size={200} className="absolute -right-20 -bottom-20 text-slate-900 opacity-5 group-hover:scale-110 transition-transform duration-1000" />
+          </div>
         </div>
       </div>
     );
@@ -461,7 +737,7 @@ const App: React.FC = () => {
             <h4 className="font-bold text-indigo-900 mb-2">Papel do Assistente Social na Escola:</h4>
             <ul className="list-disc pl-5 text-sm text-slate-600 space-y-2">
               <li>Identificação de barreiras socioeconômicas ao aprendizado.</li>
-              <li>Mediação de conflitos entre escola, família e comunidade.</li>
+              <li>Mediação de conflitos entre escola, family e comunidade.</li>
               <li>Encaminhamento para the rede de proteção social (CRAS, CREAS, CAPS).</li>
               <li>Combate à evasão escolar e ao trabalho infantil.</li>
             </ul>
@@ -739,8 +1015,8 @@ const App: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {filteredGlossary.map((item) => (
-                  <div key={item.term} className="p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                    <div className="flex items-start gap-5">
+                  <div key={item.term} className="p-8 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group flex flex-col">
+                    <div className="flex items-start gap-5 flex-1">
                       <div className="text-brand-dark bg-brand-light p-4 rounded-2xl flex-shrink-0 group-hover:bg-brand group-hover:text-slate-900 transition-colors">{item.icon || <Info />}</div>
                       <div className="space-y-3">
                         <div className="flex items-center gap-2">
@@ -750,6 +1026,13 @@ const App: React.FC = () => {
                         <p className="text-slate-600 text-sm leading-relaxed">{item.definition}</p>
                       </div>
                     </div>
+                    {/* Botão de acesso para mais informações */}
+                    <button 
+                      onClick={() => handleGlossaryDetail(item.term)}
+                      className="mt-6 flex items-center gap-2 text-[10px] font-black text-brand-dark uppercase tracking-widest hover:text-brand-deep transition-colors group/btn"
+                    >
+                      Ver detalhes <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
                   </div>
                 ))}
               </div>
